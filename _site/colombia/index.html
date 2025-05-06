@@ -15,28 +15,35 @@
         body { font-family: 'Inter', sans-serif; }
         .font-system-ui { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
     </style>
+    
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </head>
 <body class="bg-gray-900 text-gray-200">
 
     
-<header id="site-header" class="bg-gray-900/75 shadow-md sticky top-0 z-50 backdrop-blur-sm">
+    
+
+<header id="site-header" class="bg-black/75 shadow-md fixed top-0 left-0 right-0 z-50">
     <nav class="container mx-auto px-6 py-2 flex justify-between items-center">
         <a href="#" onclick="showPage('main-page'); return false;" class="text-2xl font-bold text-gray-100 hover:text-gray-300 transition duration-300 inline-flex items-center cursor-pointer">
             <img src="https://i.imgur.com/mfehD1E.png" alt="Ben's Photography Logo" class="h-12 w-auto mr-2">
             <span class="font-system-ui">Ben's Photography</span>
         </a>
         <div class="space-x-6">
-            <a href="#gallery" class="text-gray-300 hover:text-orange-500 transition duration-300 cursor-pointer">Gallery</a>
-            <a href="#about" class="text-gray-300 hover:text-orange-500 transition duration-300 cursor-pointer">About</a>
+            <a href="#gallery" class="text-gray-300 hover:text-orange-500 transition duration-300 cursor-pointer">Galerij</a>
+            <a href="#about" class="text-gray-300 hover:text-orange-500 transition duration-300 cursor-pointer">Over Mij</a>
             <a href="#contact" class="text-gray-300 hover:text-orange-500 transition duration-300 cursor-pointer">Contact</a>
         </div>
     </nav>
-</header> 
+</header>
+
 
     <main>
-         
+        
+        
     </main>
 
+    
     
 <footer class="bg-gray-800 text-gray-400 py-8">
     <div class="container mx-auto px-6 text-center">
@@ -54,22 +61,25 @@
             currentYearSpan.textContent = new Date().getFullYear();
         }
     </script>
-</footer> 
+</footer>
 
     <script>
         console.log("Base layout script started."); // DEBUG
 
-        // --- Page Switching Function (voor later of simulatie) ---
+        // --- Page Switching Function (voor de gesimuleerde landpagina's) ---
         function showPage(pageIdToShow, scrollToTop = true) {
             console.log("showPage called for:", pageIdToShow); // DEBUG
-            const pages = document.querySelectorAll('.page');
-            const mainPage = document.getElementById('main-page');
+            const pages = document.querySelectorAll('.page'); // Alle secties die als 'pagina' dienen
+            const mainPage = document.getElementById('main-page'); // De hoofdinhoud container
 
+            // Verberg eerst alle 'pagina' secties
             pages.forEach(page => {
                 if (page && !page.classList.contains('hidden')) {
                     page.classList.add('hidden');
                 }
             });
+
+            // Toon de gevraagde 'pagina' sectie
             const pageToShow = document.getElementById(pageIdToShow);
             if (pageToShow) {
                 pageToShow.classList.remove('hidden');
@@ -79,6 +89,7 @@
                 }
             } else {
                 console.warn(`Page with ID "${pageIdToShow}" not found.`);
+                // Fallback: toon de hoofdpagina als de gevraagde pagina niet bestaat
                 if (mainPage) mainPage.classList.remove('hidden');
             }
         }
@@ -86,6 +97,7 @@
         // --- Contact Form Submission with Fetch ---
         const contactForm = document.getElementById('contact-form');
         const formStatusDiv = document.getElementById('form-status');
+        // Zorg ervoor dat formStatusMsg alleen wordt gedefinieerd als formStatusDiv bestaat
         const formStatusMsg = formStatusDiv ? formStatusDiv.querySelector('p') : null;
 
         if (contactForm && formStatusDiv && formStatusMsg) {
@@ -131,8 +143,9 @@
                 });
             });
         } else {
+            // Alleen waarschuwen als het formulier zelf bestaat, maar de status elementen niet
             if (document.getElementById('contact-form')) {
-               console.warn("Contact form status elements (#form-status or its <p>) not found.");
+               console.warn("Contact form status elements (#form-status or its <p>) not found. Form feedback will not work.");
             }
         }
 
@@ -163,7 +176,6 @@
                 const timeElapsed = currentTime - startTime;
                 const progress = Math.min(timeElapsed / duration, 1);
                 const easedProgress = easeInOutQuad(progress);
-                // console.log(`[Scroll Animation] Progress: ${progress.toFixed(2)}, Scrolling to: ${(startPosition + distance * easedProgress).toFixed(0)}`); // EXTRA DEBUG - Tijdelijk uit
                 window.scrollTo(0, startPosition + distance * easedProgress);
                 if (timeElapsed < duration) {
                     requestAnimationFrame(animation);
@@ -171,11 +183,13 @@
                     console.log(`[Scroll Func] Scroll to #${targetId} finished.`); // DEBUG
                 }
             }
-            if (Math.abs(distance) > 1) {
+            if (Math.abs(distance) > 1) { // Voorkom onnodige animatie als de afstand klein is
                  console.log("[Scroll Func] Starting animation loop."); // DEBUG
                  requestAnimationFrame(animation);
             } else {
                  console.log("[Scroll Func] No significant distance to scroll, animation skipped."); // DEBUG
+                 // Optioneel: scroll direct als de afstand verwaarloosbaar is
+                 // window.scrollTo(0, finalTargetPosition);
             }
         }
 
@@ -189,7 +203,7 @@
             if (viewGalleryBtn) {
                 console.log("[Listener] Found view-gallery-btn, attaching listener."); // DEBUG
                 viewGalleryBtn.addEventListener('click', function(event) {
-                    event.preventDefault(); // Altijd voorkomen
+                    event.preventDefault();
                     console.log("[Listener] View Gallery button clicked. Attempting to find target #gallery."); // DEBUG
                     const targetElement = document.getElementById('gallery');
                     if (targetElement) {
@@ -200,8 +214,8 @@
                     }
                 });
             } else {
-                 // Alleen waarschuwen als we op de hoofdpagina zijn
-                 if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html')) {
+                 // Alleen waarschuwen als we op de hoofdpagina zijn (waar de knop hoort te zijn)
+                 if (document.getElementById('main-page') && !document.getElementById('main-page').classList.contains('hidden')) {
                      console.warn("[Listener] Element with ID 'view-gallery-btn' not found on main page.");
                  }
             }
@@ -213,21 +227,21 @@
                  link.addEventListener('click', function(event) {
                      const href = this.getAttribute('href');
                      console.log(`[Listener] Header link clicked: href="${href}"`);
-                     if (href && href.startsWith('#') && href.length > 1) {
+                     if (href && href.startsWith('#') && href.length > 1) { // Check of het een interne anchor link is
                          const targetId = href.substring(1);
                          console.log(`[Listener] Attempting to find target #${targetId}`);
                          const targetElement = document.getElementById(targetId);
                          console.log(`[Listener] Target element for #${targetId}:`, targetElement);
 
                          if (targetElement) {
-                             event.preventDefault();
+                             event.preventDefault(); // Voorkom de standaard sprong
                              console.log(`[Listener] Target #${targetId} found. Calling customSmoothScrollTo.`);
-                             customSmoothScrollTo(targetId, 1000);
+                             customSmoothScrollTo(targetId, 1000); // Scroll soepel
                          } else {
                              console.warn(`[Listener] Target #${targetId} not found on this page for header link.`);
                          }
                      } else {
-                         console.log(`[Listener] Header link href "${href}" is not an internal anchor.`);
+                         console.log(`[Listener] Header link href "${href}" is not an internal anchor or is just "#".`);
                      }
                  });
              });
@@ -239,7 +253,7 @@
                  link.addEventListener('click', function(event) {
                      const href = this.getAttribute('href');
                      console.log(`[Listener] Footer link clicked: href="${href}"`);
-                     if (href && href.startsWith('#') && href.length > 1) {
+                     if (href && href.startsWith('#') && href.length > 1) { // Check of het een interne anchor link is
                          const targetId = href.substring(1);
                          console.log(`[Listener] Attempting to find target #${targetId} from footer`);
                          const targetElement = document.getElementById(targetId);
@@ -253,13 +267,11 @@
                              console.warn(`[Listener] Target #${targetId} not found on this page for footer link.`);
                          }
                      } else {
-                         console.log(`[Listener] Footer link href "${href}" is not an internal anchor.`);
+                         console.log(`[Listener] Footer link href "${href}" is not an internal anchor or is just "#".`);
                      }
                  });
              });
-
         }); // End of DOMContentLoaded listener
-
     </script>
 
 </body>

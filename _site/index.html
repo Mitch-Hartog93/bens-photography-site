@@ -15,92 +15,97 @@
         body { font-family: 'Inter', sans-serif; }
         .font-system-ui { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
     </style>
+    
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </head>
 <body class="bg-gray-900 text-gray-200">
 
     
-<header id="site-header" class="bg-gray-900/75 shadow-md sticky top-0 z-50 backdrop-blur-sm">
+    
+
+<header id="site-header" class="bg-black/75 shadow-md fixed top-0 left-0 right-0 z-50">
     <nav class="container mx-auto px-6 py-2 flex justify-between items-center">
         <a href="#" onclick="showPage('main-page'); return false;" class="text-2xl font-bold text-gray-100 hover:text-gray-300 transition duration-300 inline-flex items-center cursor-pointer">
             <img src="https://i.imgur.com/mfehD1E.png" alt="Ben's Photography Logo" class="h-12 w-auto mr-2">
             <span class="font-system-ui">Ben's Photography</span>
         </a>
         <div class="space-x-6">
-            <a href="#gallery" class="text-gray-300 hover:text-orange-500 transition duration-300 cursor-pointer">Gallery</a>
-            <a href="#about" class="text-gray-300 hover:text-orange-500 transition duration-300 cursor-pointer">About</a>
+            <a href="#gallery" class="text-gray-300 hover:text-orange-500 transition duration-300 cursor-pointer">Galerij</a>
+            <a href="#about" class="text-gray-300 hover:text-orange-500 transition duration-300 cursor-pointer">Over Mij</a>
             <a href="#contact" class="text-gray-300 hover:text-orange-500 transition duration-300 cursor-pointer">Contact</a>
         </div>
     </nav>
-</header> 
+</header>
+
 
     <main>
         
-
+        
 <div id="main-page" class="page">
 
     
-    <section id="hero" class="bg-gray-900 text-white py-20 md:py-32 relative overflow-hidden">
+    <section id="hero" class="bg-gray-900 text-white py-32 md:py-48 relative overflow-hidden">
         <div class="absolute inset-0 z-0 opacity-40">
-             <img src="https://i.imgur.com/oCTFDn1.jpg" alt="Hero Background - Large tree with sun shining through branches" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/2d3748/e2e8f0?text=Image+Load+Error';">
+             <img src="https://i.imgur.com/oCTFDn1.jpg" alt="Hero Achtergrond - Grote boom met zonlicht door takken" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/2d3748/e2e8f0?text=Fout+bij+laden+afbeelding';">
         </div>
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">Capturing Moments, Creating Memories</h1>
-            <p class="text-lg md:text-xl mb-8 text-gray-300">Explore the world through my lens.</p>
-            <a href="#gallery" id="view-gallery-btn" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">View Gallery</a>
+        <div class="container mx-auto px-32 text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">Momenten Vangen, Herinneringen Creëren</h1>
+            <p class="text-lg md:text-xl mb-8 text-gray-300">Ontdek de wereld door mijn lens.</p>
+            <a href="#gallery" id="view-gallery-btn" class="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">Bekijk Galerij</a>
         </div>
     </section>
 
     
-    <section id="gallery" class="py-16 bg-white">
-       <div class="container mx-auto px-6">
-           <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Gallery by Country</h2>
-           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-               
-               
-               <a href="/costa-rica/" class="gallery-tile block aspect-square rounded-lg overflow-hidden shadow-lg group relative transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
-                   <img src="https://i.imgur.com/CKEzXAT.jpg" alt="Costa Rica Photos" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/cccccc/999999?text=Image+Error';">
-                   <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex items-end justify-center p-4">
-                        <span class="text-white text-xl md:text-2xl font-bold text-center">Costa Rica</span>
-                   </div>
-               </a>
-               
-               <a href="/colombia/" class="gallery-tile block aspect-square rounded-lg overflow-hidden shadow-lg group relative transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
-                   <img src="https://i.imgur.com/Zb93tZv.jpg" alt="Colombia Photos" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/cccccc/999999?text=Image+Error';">
-                   <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex items-end justify-center p-4">
-                        <span class="text-white text-xl md:text-2xl font-bold text-center">Colombia</span>
-                   </div>
-               </a>
-               
-               <a href="/canada/" class="gallery-tile block aspect-square rounded-lg overflow-hidden shadow-lg group relative transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
-                   <img src="https://i.imgur.com/a6Mk328.jpg" alt="Canada Photos" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/cccccc/999999?text=Image+Error';">
-                   <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex items-end justify-center p-4">
-                        <span class="text-white text-xl md:text-2xl font-bold text-center">Canada</span>
-                   </div>
-               </a>
-               
-               <a href="/the-netherlands/" class="gallery-tile block aspect-square rounded-lg overflow-hidden shadow-lg group relative transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
-                   <img src="https://i.imgur.com/LX2uKv9.jpg" alt="the Netherlands Photos" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/cccccc/999999?text=Image+Error';">
-                   <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex items-end justify-center p-4">
-                        <span class="text-white text-xl md:text-2xl font-bold text-center">the Netherlands</span>
-                   </div>
-               </a>
-           </div>
+ 
+<section id="gallery" class="py-16 bg-white">
+   <div class="container mx-auto px-32">
+       <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Galerij per Land</h2>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
+           
+           <a href="/costa-rica/" class="gallery-tile block aspect-square rounded-lg overflow-hidden shadow-lg group relative transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+               <img src="https://i.imgur.com/CKEzXAT.jpg" alt="Costa Rica Foto's" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/cccccc/999999?text=Afbeeldingsfout';">
+               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex items-end justify-center p-4">
+                    <span class="text-white text-xl md:text-2xl font-bold text-center">Costa Rica</span>
+               </div>
+           </a>
+           
+           <a href="/colombia/" class="gallery-tile block aspect-square rounded-lg overflow-hidden shadow-lg group relative transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+               <img src="https://i.imgur.com/Zb93tZv.jpg" alt="Colombia Foto's" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/cccccc/999999?text=Afbeeldingsfout';">
+               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex items-end justify-center p-4">
+                    <span class="text-white text-xl md:text-2xl font-bold text-center">Colombia</span>
+               </div>
+           </a>
+           
+           <a href="/canada/" class="gallery-tile block aspect-square rounded-lg overflow-hidden shadow-lg group relative transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+               <img src="https://i.imgur.com/a6Mk328.jpg" alt="Canada Foto's" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/cccccc/999999?text=Afbeeldingsfout';">
+               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex items-end justify-center p-4">
+                    <span class="text-white text-xl md:text-2xl font-bold text-center">Canada</span>
+               </div>
+           </a>
+           
+           <a href="/the-netherlands/" class="gallery-tile block aspect-square rounded-lg overflow-hidden shadow-lg group relative transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+               <img src="https://i.imgur.com/LX2uKv9.jpg" alt="the Netherlands Foto's" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/cccccc/999999?text=Afbeeldingsfout';">
+               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex items-end justify-center p-4">
+                    <span class="text-white text-xl md:text-2xl font-bold text-center">the Netherlands</span>
+               </div>
+           </a>
        </div>
-    </section>
+   </div>
+</section>
 
     
     <section id="about" class="py-16 bg-gray-50">
-         <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+         <div class="container mx-auto px-32 flex flex-col md:flex-row items-center">
              <div class="md:w-1/2 mb-8 md:mb-0 md:pr-12">
-                 <img src="https://i.imgur.com/ao5eMAr.jpg" alt="Profile picture for Ben's Photography" class="rounded-lg shadow-xl w-full h-auto object-cover aspect-square" onerror="this.onerror=null; this.src='https://placehold.co/500x500/cccccc/999999?text=Image+Not+Found';">
+                 <img src="https://i.imgur.com/ao5eMAr.jpg" alt="Profielfoto voor Ben's Fotografie" class="rounded-lg shadow-xl w-full h-auto object-cover aspect-square" onerror="this.onerror=null; this.src='https://placehold.co/500x500/cccccc/999999?text=Afbeelding+niet+gevonden';">
              </div>
              <div class="md:w-1/2">
-                 <h2 class="text-3xl font-bold mb-4 text-gray-800">About Me</h2>
+                 <h2 class="text-3xl font-bold mb-4 text-gray-800">Over Mij</h2>
                  <p class="text-gray-600 mb-4 leading-relaxed">
-                     Hi, I'm the photographer behind Ben's Photography, based in Woerden, Netherlands. I specialize in [Your Specialization, e.g., landscape, portrait, wedding photography]. My journey into photography started [Number] years ago, driven by a desire to capture the beauty and emotion of the world around us.
+                     Hallo, ik ben de fotograaf achter Ben's Fotografie, gevestigd in Woerden, Nederland. Ik specialiseer me in [Jouw Specialisatie, bijv. landschap, portret, bruiloft fotografie]. Mijn reis in fotografie begon [Aantal] jaar geleden, gedreven door een verlangen om de schoonheid en emotie van de wereld om ons heen vast te leggen.
                  </p>
                  <p class="text-gray-600 leading-relaxed">
-                     Through my lens, I aim to tell stories, evoke feelings, and preserve precious moments. Whether it's the grandeur of nature or the intimacy of a portrait, I strive for authenticity and artistry in every shot.
+                     Door mijn lens probeer ik verhalen te vertellen, gevoelens op te roepen en kostbare momenten te bewaren. Of het nu de grootsheid van de natuur is of de intimiteit van een portret, ik streef naar authenticiteit en artisticiteit in elke opname.
                  </p>
                  <div class="mt-6 space-x-4">
                      <a href="https://www.instagram.com/bhartog/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-orange-500 transition duration-300"><i class="fab fa-instagram fa-lg"></i> Instagram</a>
@@ -113,25 +118,25 @@
 
     
     <section id="contact" class="py-16 bg-white">
-         <div class="container mx-auto px-6">
-             <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Get In Touch</h2>
+         <div class="container mx-auto px-32">
+             <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Neem Contact Op</h2>
              <div class="max-w-2xl mx-auto bg-gray-50 p-8 rounded-lg shadow-md">
                  <form id="contact-form" action="https://formspree.io/f/mwplyzvq" method="POST">
                      <div class="mb-4">
-                         <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+                         <label for="name" class="block text-gray-700 font-medium mb-2">Naam</label>
                          <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-gray-900">
                      </div>
                      <div class="mb-4">
-                         <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                         <label for="email" class="block text-gray-700 font-medium mb-2">E-mail</label>
                          <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-gray-900">
                      </div>
                      <div class="mb-6">
-                         <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                         <label for="message" class="block text-gray-700 font-medium mb-2">Bericht</label>
                          <textarea id="message" name="message" rows="5" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-gray-900"></textarea>
                      </div>
                      <div class="text-center">
-                         <button type="submit" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">
-                             Send Message
+                         <button type="submit" class="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">
+                             Verstuur Bericht
                          </button>
                      </div>
                  </form>
@@ -142,9 +147,11 @@
          </div>
     </section>
 
-</div>  
+</div> 
+
     </main>
 
+    
     
 <footer class="bg-gray-800 text-gray-400 py-8">
     <div class="container mx-auto px-6 text-center">
@@ -162,22 +169,25 @@
             currentYearSpan.textContent = new Date().getFullYear();
         }
     </script>
-</footer> 
+</footer>
 
     <script>
         console.log("Base layout script started."); // DEBUG
 
-        // --- Page Switching Function (voor later of simulatie) ---
+        // --- Page Switching Function (voor de gesimuleerde landpagina's) ---
         function showPage(pageIdToShow, scrollToTop = true) {
             console.log("showPage called for:", pageIdToShow); // DEBUG
-            const pages = document.querySelectorAll('.page');
-            const mainPage = document.getElementById('main-page');
+            const pages = document.querySelectorAll('.page'); // Alle secties die als 'pagina' dienen
+            const mainPage = document.getElementById('main-page'); // De hoofdinhoud container
 
+            // Verberg eerst alle 'pagina' secties
             pages.forEach(page => {
                 if (page && !page.classList.contains('hidden')) {
                     page.classList.add('hidden');
                 }
             });
+
+            // Toon de gevraagde 'pagina' sectie
             const pageToShow = document.getElementById(pageIdToShow);
             if (pageToShow) {
                 pageToShow.classList.remove('hidden');
@@ -187,6 +197,7 @@
                 }
             } else {
                 console.warn(`Page with ID "${pageIdToShow}" not found.`);
+                // Fallback: toon de hoofdpagina als de gevraagde pagina niet bestaat
                 if (mainPage) mainPage.classList.remove('hidden');
             }
         }
@@ -194,6 +205,7 @@
         // --- Contact Form Submission with Fetch ---
         const contactForm = document.getElementById('contact-form');
         const formStatusDiv = document.getElementById('form-status');
+        // Zorg ervoor dat formStatusMsg alleen wordt gedefinieerd als formStatusDiv bestaat
         const formStatusMsg = formStatusDiv ? formStatusDiv.querySelector('p') : null;
 
         if (contactForm && formStatusDiv && formStatusMsg) {
@@ -239,8 +251,9 @@
                 });
             });
         } else {
+            // Alleen waarschuwen als het formulier zelf bestaat, maar de status elementen niet
             if (document.getElementById('contact-form')) {
-               console.warn("Contact form status elements (#form-status or its <p>) not found.");
+               console.warn("Contact form status elements (#form-status or its <p>) not found. Form feedback will not work.");
             }
         }
 
@@ -271,7 +284,6 @@
                 const timeElapsed = currentTime - startTime;
                 const progress = Math.min(timeElapsed / duration, 1);
                 const easedProgress = easeInOutQuad(progress);
-                // console.log(`[Scroll Animation] Progress: ${progress.toFixed(2)}, Scrolling to: ${(startPosition + distance * easedProgress).toFixed(0)}`); // EXTRA DEBUG - Tijdelijk uit
                 window.scrollTo(0, startPosition + distance * easedProgress);
                 if (timeElapsed < duration) {
                     requestAnimationFrame(animation);
@@ -279,11 +291,13 @@
                     console.log(`[Scroll Func] Scroll to #${targetId} finished.`); // DEBUG
                 }
             }
-            if (Math.abs(distance) > 1) {
+            if (Math.abs(distance) > 1) { // Voorkom onnodige animatie als de afstand klein is
                  console.log("[Scroll Func] Starting animation loop."); // DEBUG
                  requestAnimationFrame(animation);
             } else {
                  console.log("[Scroll Func] No significant distance to scroll, animation skipped."); // DEBUG
+                 // Optioneel: scroll direct als de afstand verwaarloosbaar is
+                 // window.scrollTo(0, finalTargetPosition);
             }
         }
 
@@ -297,7 +311,7 @@
             if (viewGalleryBtn) {
                 console.log("[Listener] Found view-gallery-btn, attaching listener."); // DEBUG
                 viewGalleryBtn.addEventListener('click', function(event) {
-                    event.preventDefault(); // Altijd voorkomen
+                    event.preventDefault();
                     console.log("[Listener] View Gallery button clicked. Attempting to find target #gallery."); // DEBUG
                     const targetElement = document.getElementById('gallery');
                     if (targetElement) {
@@ -308,8 +322,8 @@
                     }
                 });
             } else {
-                 // Alleen waarschuwen als we op de hoofdpagina zijn
-                 if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html')) {
+                 // Alleen waarschuwen als we op de hoofdpagina zijn (waar de knop hoort te zijn)
+                 if (document.getElementById('main-page') && !document.getElementById('main-page').classList.contains('hidden')) {
                      console.warn("[Listener] Element with ID 'view-gallery-btn' not found on main page.");
                  }
             }
@@ -321,21 +335,21 @@
                  link.addEventListener('click', function(event) {
                      const href = this.getAttribute('href');
                      console.log(`[Listener] Header link clicked: href="${href}"`);
-                     if (href && href.startsWith('#') && href.length > 1) {
+                     if (href && href.startsWith('#') && href.length > 1) { // Check of het een interne anchor link is
                          const targetId = href.substring(1);
                          console.log(`[Listener] Attempting to find target #${targetId}`);
                          const targetElement = document.getElementById(targetId);
                          console.log(`[Listener] Target element for #${targetId}:`, targetElement);
 
                          if (targetElement) {
-                             event.preventDefault();
+                             event.preventDefault(); // Voorkom de standaard sprong
                              console.log(`[Listener] Target #${targetId} found. Calling customSmoothScrollTo.`);
-                             customSmoothScrollTo(targetId, 1000);
+                             customSmoothScrollTo(targetId, 1000); // Scroll soepel
                          } else {
                              console.warn(`[Listener] Target #${targetId} not found on this page for header link.`);
                          }
                      } else {
-                         console.log(`[Listener] Header link href "${href}" is not an internal anchor.`);
+                         console.log(`[Listener] Header link href "${href}" is not an internal anchor or is just "#".`);
                      }
                  });
              });
@@ -347,7 +361,7 @@
                  link.addEventListener('click', function(event) {
                      const href = this.getAttribute('href');
                      console.log(`[Listener] Footer link clicked: href="${href}"`);
-                     if (href && href.startsWith('#') && href.length > 1) {
+                     if (href && href.startsWith('#') && href.length > 1) { // Check of het een interne anchor link is
                          const targetId = href.substring(1);
                          console.log(`[Listener] Attempting to find target #${targetId} from footer`);
                          const targetElement = document.getElementById(targetId);
@@ -361,13 +375,11 @@
                              console.warn(`[Listener] Target #${targetId} not found on this page for footer link.`);
                          }
                      } else {
-                         console.log(`[Listener] Footer link href "${href}" is not an internal anchor.`);
+                         console.log(`[Listener] Footer link href "${href}" is not an internal anchor or is just "#".`);
                      }
                  });
              });
-
         }); // End of DOMContentLoaded listener
-
     </script>
 
 </body>

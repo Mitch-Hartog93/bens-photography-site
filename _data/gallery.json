@@ -2,21 +2,25 @@
     {
       "country": "Costa Rica",
       "image": "https://i.imgur.com/CKEzXAT.jpg",
-      "pageId": "costa-rica-page"
+      "pageId": "costa-rica-page",
+      "slug": "costa-rica"
     },
     {
       "country": "Colombia",
       "image": "https://i.imgur.com/Zb93tZv.jpg",
-      "pageId": "colombia-page"
+      "pageId": "colombia-page",
+      "slug": "colombia"
     },
     {
       "country": "Canada",
       "image": "https://i.imgur.com/a6Mk328.jpg",
-      "pageId": "canada-page"
+      "pageId": "canada-page",
+      "slug": "canada"
     },
     {
       "country": "the Netherlands",
       "image": "https://i.imgur.com/LX2uKv9.jpg",
-      "pageId": "netherlands-page"
+      "pageId": "netherlands-page",
+      "slug": "the-netherlands"
     }
   ]

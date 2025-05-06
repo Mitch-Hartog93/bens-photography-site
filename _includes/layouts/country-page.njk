@@ -1,30 +1,35 @@
 {# _includes/layouts/country-page.njk #}
-{# Deze template gebruikt de 'base.njk' layout als basis #}
-{% extends "layouts/base.njk" %}
+{% extends "layouts/base.njk" %} {# Gebruikt de algemene basis layout #}
 
-{# Dit 'block' vervangt de 'content' placeholder in base.njk #}
 {% block content %}
-<section class="page py-16 bg-white text-gray-800"> {# Zorg voor lichte achtergrond en donkere tekst #}
-    <div class="container mx-auto px-6">
-        <div class="flex justify-between items-center mb-8">
-             {# Gebruik de 'title' uit de front matter van de trigger-pagina (zie Stap 3) #}
-             <h2 class="text-3xl font-bold">{{ title }} Photos</h2>
-             {# Link terug naar de hoofdgalerij op de homepage #}
-             <a href="/#gallery" class="text-blue-600 hover:text-orange-500 transition duration-300">&larr; Back to Main Gallery</a>
+<section class="page py-16 bg-white text-gray-800">
+    <div class="container mx-auto px-32"> {# Gebruik dezelfde brede padding als de homepage #}
+        <div class="flex justify-between items-center mb-12">
+             {# De 'title' komt uit de front matter van het trigger-bestand (bijv. costa-rica.njk) #}
+             <h2 class="text-4xl font-bold text-gray-900">{{ title }} Foto's</h2>
+             {# Link terug naar de hoofdpagina (anker naar galerij) #}
+             <a href="/#gallery" class="text-blue-600 hover:text-orange-500 transition duration-300 text-lg">&larr; Terug naar Hoofdgalerij</a>
         </div>
 
         {# Grid om de foto's weer te geven #}
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {# Loop door alle items in de collectie die bij deze pagina hoort #}
-            {# De collectie wordt bepaald door de 'tag' in de trigger-pagina (zie Stap 3) #}
+            {# De 'tag' variabele komt uit de front matter van het trigger-bestand #}
             {%- for photo in collections[tag] | reverse %} {# 'reverse' toont nieuwste eerst (optioneel) #}
-            <div class="aspect-square bg-gray-200 rounded-lg overflow-hidden shadow-md">
+            <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-lg group transform transition-all duration-300 hover:shadow-2xl">
                  {# Gebruik data uit de front matter van elk foto-bestand (.md) #}
                  {# De 'url' filter zorgt voor correcte paden #}
-                 <img src="{{ photo.data.image | url }}" alt="{{ photo.data.alt or photo.data.title }}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x400/cccccc/999999?text=Error';">
-                 {# Optioneel: titel onder de foto #}
-                 {# <p class="text-center text-sm mt-1 p-1">{{ photo.data.title }}</p> #}
+                 <img src="{{ photo.data.image | url }}" alt="{{ photo.data.alt or photo.data.title }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x400/cccccc/999999?text=Afbeeldingsfout';">
+                 {# Optioneel: titel onder de foto als overlay #}
+                 {#
+                 <div class="absolute bottom-0 left-0 right-0 p-2 bg-black bg-opacity-50 text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                     {{ photo.data.title }}
+                 </div>
+                 #}
             </div>
+            {%- else %}
+            {# Wordt getoond als er geen foto's zijn met de opgegeven tag #}
+            <p class="col-span-full text-center text-gray-600">Er zijn nog geen foto's in deze galerij.</p>
             {%- endfor %}
         </div>
     </div>

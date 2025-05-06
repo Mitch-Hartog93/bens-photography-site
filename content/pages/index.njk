@@ -1,56 +1,55 @@
 ---
-layout: layouts/base.njk  # Vertelt Eleventy welke layout te gebruiken
-title: Home             # Paginatitel (optioneel, overschrijft site.title)
-permalink: /            # Waar deze pagina komt (hoofdpagina)
+layout: layouts/base.njk
+title: Home
+permalink: /
 ---
 
-{# Openings-tag voor de main-page container #}
 <div id="main-page" class="page">
 
     {# Hero Sectie #}
-    <section id="hero" class="bg-gray-900 text-white py-20 md:py-32 relative overflow-hidden">
+    <section id="hero" class="bg-gray-900 text-white py-32 md:py-48 relative overflow-hidden">
         <div class="absolute inset-0 z-0 opacity-40">
-             <img src="https://i.imgur.com/oCTFDn1.jpg" alt="Hero Background - Large tree with sun shining through branches" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/2d3748/e2e8f0?text=Image+Load+Error';">
+             <img src="https://i.imgur.com/oCTFDn1.jpg" alt="Hero Achtergrond - Grote boom met zonlicht door takken" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/2d3748/e2e8f0?text=Fout+bij+laden+afbeelding';">
         </div>
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">Capturing Moments, Creating Memories</h1>
-            <p class="text-lg md:text-xl mb-8 text-gray-300">Explore the world through my lens.</p>
-            <a href="#gallery" id="view-gallery-btn" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">View Gallery</a>
+        <div class="container mx-auto px-32 text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">Momenten Vangen, Herinneringen Creëren</h1>
+            <p class="text-lg md:text-xl mb-8 text-gray-300">Ontdek de wereld door mijn lens.</p>
+            <a href="#gallery" id="view-gallery-btn" class="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">Bekijk Galerij</a>
         </div>
     </section>
 
-    {# Gallery Sectie - Nu met Nunjucks loop #}
-    <section id="gallery" class="py-16 bg-white">
-       <div class="container mx-auto px-6">
-           <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Gallery by Country</h2>
-           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-               {# Nunjucks for loop om door de landen in gallery.json te gaan #}
-               {%- for item in gallery %}
-               {# Aangepaste href - gebruikt de 'slug' filter #}
-               <a href="/{{ item.country | slug }}/" class="gallery-tile block aspect-square rounded-lg overflow-hidden shadow-lg group relative transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
-                   <img src="{{ item.image }}" alt="{{ item.country }} Photos" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/cccccc/999999?text=Image+Error';">
-                   <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex items-end justify-center p-4">
-                        <span class="text-white text-xl md:text-2xl font-bold text-center">{{ item.country }}</span>
-                   </div>
-               </a>
-               {%- endfor %}
-           </div>
+    {# Galerij Sectie #}
+ {# Galerij Sectie #}
+<section id="gallery" class="py-16 bg-white">
+   <div class="container mx-auto px-32">
+       <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Galerij per Land</h2>
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
+           {%- for item in gallery %}
+           {# Zorg dat item.slug bestaat in je _data/gallery.json #}
+           <a href="/{{ item.slug | url }}/" class="gallery-tile block aspect-square rounded-lg overflow-hidden shadow-lg group relative transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+               <img src="{{ item.image }}" alt="{{ item.country }} Foto's" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/600x600/cccccc/999999?text=Afbeeldingsfout';">
+               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex items-end justify-center p-4">
+                    <span class="text-white text-xl md:text-2xl font-bold text-center">{{ item.country }}</span>
+               </div>
+           </a>
+           {%- endfor %}
        </div>
-    </section>
+   </div>
+</section>
 
     {# About Sectie #}
     <section id="about" class="py-16 bg-gray-50">
-         <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+         <div class="container mx-auto px-32 flex flex-col md:flex-row items-center">
              <div class="md:w-1/2 mb-8 md:mb-0 md:pr-12">
-                 <img src="https://i.imgur.com/ao5eMAr.jpg" alt="Profile picture for Ben's Photography" class="rounded-lg shadow-xl w-full h-auto object-cover aspect-square" onerror="this.onerror=null; this.src='https://placehold.co/500x500/cccccc/999999?text=Image+Not+Found';">
+                 <img src="https://i.imgur.com/ao5eMAr.jpg" alt="Profielfoto voor Ben's Fotografie" class="rounded-lg shadow-xl w-full h-auto object-cover aspect-square" onerror="this.onerror=null; this.src='https://placehold.co/500x500/cccccc/999999?text=Afbeelding+niet+gevonden';">
              </div>
              <div class="md:w-1/2">
-                 <h2 class="text-3xl font-bold mb-4 text-gray-800">About Me</h2>
+                 <h2 class="text-3xl font-bold mb-4 text-gray-800">Over Mij</h2>
                  <p class="text-gray-600 mb-4 leading-relaxed">
-                     Hi, I'm the photographer behind Ben's Photography, based in Woerden, Netherlands. I specialize in [Your Specialization, e.g., landscape, portrait, wedding photography]. My journey into photography started [Number] years ago, driven by a desire to capture the beauty and emotion of the world around us.
+                     Hallo, ik ben de fotograaf achter Ben's Fotografie, gevestigd in Woerden, Nederland. Ik specialiseer me in [Jouw Specialisatie, bijv. landschap, portret, bruiloft fotografie]. Mijn reis in fotografie begon [Aantal] jaar geleden, gedreven door een verlangen om de schoonheid en emotie van de wereld om ons heen vast te leggen.
                  </p>
                  <p class="text-gray-600 leading-relaxed">
-                     Through my lens, I aim to tell stories, evoke feelings, and preserve precious moments. Whether it's the grandeur of nature or the intimacy of a portrait, I strive for authenticity and artistry in every shot.
+                     Door mijn lens probeer ik verhalen te vertellen, gevoelens op te roepen en kostbare momenten te bewaren. Of het nu de grootsheid van de natuur is of de intimiteit van een portret, ik streef naar authenticiteit en artisticiteit in elke opname.
                  </p>
                  <div class="mt-6 space-x-4">
                      <a href="https://www.instagram.com/bhartog/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-orange-500 transition duration-300"><i class="fab fa-instagram fa-lg"></i> Instagram</a>
@@ -63,25 +62,25 @@ permalink: /            # Waar deze pagina komt (hoofdpagina)
 
     {# Contact Sectie #}
     <section id="contact" class="py-16 bg-white">
-         <div class="container mx-auto px-6">
-             <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Get In Touch</h2>
+         <div class="container mx-auto px-32">
+             <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Neem Contact Op</h2>
              <div class="max-w-2xl mx-auto bg-gray-50 p-8 rounded-lg shadow-md">
                  <form id="contact-form" action="https://formspree.io/f/mwplyzvq" method="POST">
                      <div class="mb-4">
-                         <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+                         <label for="name" class="block text-gray-700 font-medium mb-2">Naam</label>
                          <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-gray-900">
                      </div>
                      <div class="mb-4">
-                         <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                         <label for="email" class="block text-gray-700 font-medium mb-2">E-mail</label>
                          <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-gray-900">
                      </div>
                      <div class="mb-6">
-                         <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                         <label for="message" class="block text-gray-700 font-medium mb-2">Bericht</label>
                          <textarea id="message" name="message" rows="5" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-gray-900"></textarea>
                      </div>
                      <div class="text-center">
-                         <button type="submit" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">
-                             Send Message
+                         <button type="submit" class="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">
+                             Verstuur Bericht
                          </button>
                      </div>
                  </form>
