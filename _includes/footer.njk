@@ -1,10 +1,10 @@
 {# _includes/footer.njk #}
-<footer class="bg-gray-800 text-gray-400 py-8">
-    <div class="container mx-auto px-6 text-center">
-        <p>&copy; <span id="current-year"></span> {{ site.copyrightName or "Ben's Photography" }}. All Rights Reserved.</p>
+<footer class="bg-gray-900 text-gray-400 py-8"> {# Achtergrond veranderd naar bg-gray-900 #}
+    <div class="container mx-auto px-32 text-center"> {# Behoud de brede padding voor consistentie #}
+        <p>&copy; <span id="current-year"></span> {{ site.copyrightName or "Ben's Fotografie" }}. Alle Rechten Voorbehouden.</p>
         <div class="mt-4 space-x-4">
-            <a href="#gallery" class="hover:text-orange-500 transition duration-300 cursor-pointer">Gallery</a>
-            <a href="#about" class="hover:text-orange-500 transition duration-300 cursor-pointer">About</a>
+            <a href="#gallery" class="hover:text-orange-500 transition duration-300 cursor-pointer">Galerij</a>
+            <a href="#about" class="hover:text-orange-500 transition duration-300 cursor-pointer">Over Mij</a>
             <a href="#contact" class="hover:text-orange-500 transition duration-300 cursor-pointer">Contact</a>
         </div>
     </div>
