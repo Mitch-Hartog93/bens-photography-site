@@ -5,74 +5,24 @@ backend:
   branch: main # Of de naam van je hoofdbranch (vaak 'main' of 'master')
 
 # Media: Waar moeten geüploade afbeeldingen worden opgeslagen?
-media_folder: "static/img/uploads" # Pad in je projectmap waar foto's komen
-public_folder: "/img/uploads" # Pad zoals de website het ziet (zonder 'static')
+media_folder: "static/img/uploads" # Pad IN JE REPOSITORY waar foto's komen
+public_folder: "/img/uploads"     # Pad ZOALS DE WEBSITE HET ZIET (vanaf de root van de site)
 
 # Collections: Welke soorten inhoud kan je vader bewerken?
 collections:
-  # 1. Instellingen voor de hoofdpagina (About Me tekst)
-  - name: "pages" # Interne naam voor deze collectie
-    label: "Hoofdpagina" # Naam zoals je vader het ziet in het CMS
-    files: # We bewerken hier één specifiek bestand
-      - label: "Over Mij Pagina" # Naam van het item in het CMS
-        name: "about_content" # Interne naam
-        file: "content/pages/index.njk" # WELK BESTAND WORDT BEWERKT?
-        fields: # Welke velden in dat bestand zijn bewerkbaar?
-          # Let op: Decap CMS werkt het makkelijkst met Markdown (.md) bestanden.
-          # Het direct bewerken van .njk is lastig. We maken hier een placeholder
-          # veld aan, maar idealiter splits je de 'About Me' tekst later
-          # naar een apart _data/about.md bestand. Voor nu laten we dit even zo.
-          - { label: "Titel (niet bewerken)", name: "title_placeholder", widget: "hidden", default: "Home" }
-          # Voeg hier later velden toe als je bijv. de 'About' tekst in een apart bestand zet.
+  # ... (je 'pages' collectie als je die hebt) ...
 
-  # 2. Collectie voor Costa Rica Foto's
-  - name: "costa_rica" # Interne naam (uniek)
-    label: "Foto's Costa Rica" # Naam zoals je vader het ziet
+  # Collectie voor Costa Rica Foto's
+  - name: "costa_rica"
+    label: "Foto's Costa Rica"
     folder: "content/costa-rica" # In welke map staan de foto-bestanden (.md)?
-    create: true # Mag je vader nieuwe foto's toevoegen? Ja.
+    create: true
     slug: "{{slug}}" # Hoe wordt de bestandsnaam gemaakt (automatisch)
-    fields: # Welke informatie heeft elke foto? (Komt overeen met front matter)
-      - { label: "Titel / Bijschrift", name: "title", widget: "string" }
-      - { label: "Foto Bestand", name: "image", widget: "image" }
-      - { label: "Alternatieve Tekst (Alt)", name: "alt", widget: "string" }
-      - { label: "Tag (niet wijzigen!)", name: "tags", widget: "hidden", default: ["costa-rica-photos"] } # Automatisch de juiste tag
-      - { label: "Beschrijving (optioneel)", name: "body", widget: "markdown", required: false }
-
-  # 3. Collectie voor Colombia Foto's (kopie van Costa Rica, maar met andere waarden)
-  - name: "colombia"
-    label: "Foto's Colombia"
-    folder: "content/colombia"
-    create: true
-    slug: "{{slug}}"
     fields:
       - { label: "Titel / Bijschrift", name: "title", widget: "string" }
-      - { label: "Foto Bestand", name: "image", widget: "image" }
+      - { label: "Foto Bestand", name: "image", widget: "image" } # Dit veld gebruikt media_folder/public_folder
       - { label: "Alternatieve Tekst (Alt)", name: "alt", widget: "string" }
-      - { label: "Tag (niet wijzigen!)", name: "tags", widget: "hidden", default: ["colombia-photos"] }
+      - { label: "Tag (niet wijzigen!)", name: "tags", widget: "hidden", default: ["costa-rica-photos"] }
       - { label: "Beschrijving (optioneel)", name: "body", widget: "markdown", required: false }
 
-  # 4. Collectie voor Canada Foto's (kopie van Costa Rica, maar met andere waarden)
-  - name: "canada"
-    label: "Foto's Canada"
-    folder: "content/canada"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Titel / Bijschrift", name: "title", widget: "string" }
-      - { label: "Foto Bestand", name: "image", widget: "image" }
-      - { label: "Alternatieve Tekst (Alt)", name: "alt", widget: "string" }
-      - { label: "Tag (niet wijzigen!)", name: "tags", widget: "hidden", default: ["canada-photos"] }
-      - { label: "Beschrijving (optioneel)", name: "body", widget: "markdown", required: false }
-
-  # 5. Collectie voor Nederland Foto's (kopie van Costa Rica, maar met andere waarden)
-  - name: "netherlands"
-    label: "Foto's Nederland"
-    folder: "content/netherlands"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Titel / Bijschrift", name: "title", widget: "string" }
-      - { label: "Foto Bestand", name: "image", widget: "image" }
-      - { label: "Alternatieve Tekst (Alt)", name: "alt", widget: "string" }
-      - { label: "Tag (niet wijzigen!)", name: "tags", widget: "hidden", default: ["netherlands-photos"] }
-      - { label: "Beschrijving (optioneel)", name: "body", widget: "markdown", required: false }
+  # ... (Vergelijkbare collecties voor Colombia, Canada, Nederland) ...

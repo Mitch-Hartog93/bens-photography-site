@@ -11,25 +11,25 @@
              <a href="/#gallery" class="text-blue-600 hover:text-orange-500 transition duration-300 text-lg">&larr; Terug naar Hoofdgalerij</a>
         </div>
 
+        {# DEBUG: Toon de tag die wordt gebruikt en het aantal gevonden foto's #}
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6" role="alert">
+            <p class="font-bold">Debug Info:</p>
+            <p>Gebruikte tag voor deze pagina: <code>{{ tag }}</code></p>
+            <p>Aantal foto's gevonden in collectie <code>collections.{{ tag }}</code>: <code>{{ collections[tag].length if collections[tag] else 0 }}</code></p>
+        </div>
+
         {# Grid om de foto's weer te geven #}
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {# Loop door alle items in de collectie die bij deze pagina hoort #}
             {# De 'tag' variabele komt uit de front matter van het trigger-bestand #}
             {%- for photo in collections[tag] | reverse %} {# 'reverse' toont nieuwste eerst (optioneel) #}
             <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-lg group transform transition-all duration-300 hover:shadow-2xl">
-                 {# Gebruik data uit de front matter van elk foto-bestand (.md) #}
-                 {# De 'url' filter zorgt voor correcte paden #}
-                 <img src="{{ photo.data.image | url }}" alt="{{ photo.data.alt or photo.data.title }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x400/cccccc/999999?text=Afbeeldingsfout';">
-                 {# Optioneel: titel onder de foto als overlay #}
-                 {#
-                 <div class="absolute bottom-0 left-0 right-0 p-2 bg-black bg-opacity-50 text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                     {{ photo.data.title }}
-                 </div>
-                 #}
+                 {# DEBUG: Toon data voor elke foto #}
+                 <img src="{{ photo.data.image | url }}" alt="{{ photo.data.alt or photo.data.title }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x400/cccccc/999999?text=Afbeeldingsfout: {{ photo.data.image | url }}'; console.error('Fout bij laden afbeelding: {{ photo.data.image | url }}')">
             </div>
             {%- else %}
             {# Wordt getoond als er geen foto's zijn met de opgegeven tag #}
-            <p class="col-span-full text-center text-gray-600">Er zijn nog geen foto's in deze galerij.</p>
+            <p class="col-span-full text-center text-gray-600">Er zijn nog geen foto's in deze galerij voor de tag '{{ tag }}'. Controleer of de foto-bestanden de juiste tag hebben.</p>
             {%- endfor %}
         </div>
     </div>

@@ -38,7 +38,7 @@
 </header>
 
 
-    <main>
+    <main> 
         
 <div id="main-page" class="page">
 
@@ -174,11 +174,9 @@
         console.log("Base layout script gestart.");
 
         function showPage(pageIdToShow, scrollToTop = true) {
-            // ... (showPage functie zoals voorheen)
-            console.log("showPage aangeroepen voor:", pageIdToShow);
+            // ... (showPage functie zoals eerder gedefinieerd)
             const pages = document.querySelectorAll('.page');
             const mainPage = document.getElementById('main-page');
-
             pages.forEach(page => {
                 if (page && !page.classList.contains('hidden')) {
                     page.classList.add('hidden');
@@ -201,7 +199,7 @@
         const formStatusMsg = formStatusDiv ? formStatusDiv.querySelector('p') : null;
 
         if (contactForm && formStatusDiv && formStatusMsg) {
-            // ... (contact form handler zoals voorheen)
+            // ... (contact form handler zoals eerder gedefinieerd)
             contactForm.addEventListener('submit', function(event) {
                 event.preventDefault();
                 const formData = new FormData(contactForm);
@@ -246,7 +244,7 @@
         }
 
         function customSmoothScrollTo(targetId, duration) {
-            // ... (customSmoothScrollTo functie zoals voorheen)
+            // ... (customSmoothScrollTo functie zoals eerder gedefinieerd)
             const targetElement = document.getElementById(targetId);
             const header = document.getElementById('site-header');
             if (!targetElement) {
@@ -291,7 +289,7 @@
                     mainElement.style.paddingTop = `${headerHeight}px`;
                     console.log(`Main padding-top ingesteld op: ${headerHeight}px`);
                 } else {
-                    console.warn("Header of main element niet gevonden voor padding aanpassing.");
+                    // console.warn("Header of main element niet gevonden voor padding aanpassing.");
                 }
             }
             adjustMainPadding();
@@ -299,7 +297,7 @@
 
             const viewGalleryBtn = document.getElementById('view-gallery-btn');
             if (viewGalleryBtn) {
-                // ... (viewGalleryBtn listener zoals voorheen)
+                // ... (viewGalleryBtn listener zoals eerder gedefinieerd)
                 viewGalleryBtn.addEventListener('click', function(event) {
                     event.preventDefault();
                     const targetElement = document.getElementById('gallery');
@@ -317,8 +315,8 @@
 
              const headerLinks = document.querySelectorAll('header nav a[href^="#"]');
              headerLinks.forEach(link => {
-                 // ... (headerLinks listener zoals voorheen)
-                 link.addEventListener('click', function(event) {
+                 // ... (headerLinks listener zoals eerder gedefinieerd)
+                link.addEventListener('click', function(event) {
                      const href = this.getAttribute('href');
                      if (href && href.startsWith('#') && href.length > 1) {
                          const targetId = href.substring(1);
@@ -335,7 +333,7 @@
 
              const footerLinks = document.querySelectorAll('footer a[href^="#"]');
              footerLinks.forEach(link => {
-                 // ... (footerLinks listener zoals voorheen)
+                 // ... (footerLinks listener zoals eerder gedefinieerd)
                   link.addEventListener('click', function(event) {
                      const href = this.getAttribute('href');
                      if (href && href.startsWith('#') && href.length > 1) {
