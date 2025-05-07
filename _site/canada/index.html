@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Canada</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -17,10 +16,11 @@
     </style>
     
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body class="bg-gray-900 text-gray-200">
 
-    
     
 
 <header id="site-header" class="bg-black/75 shadow-md fixed top-0 left-0 right-0 z-50">
@@ -40,10 +40,8 @@
 
     <main>
         
-        
     </main>
 
-    
     
 <footer class="bg-gray-900 text-gray-400 py-8"> 
     <div class="container mx-auto px-32 text-center"> 
@@ -65,50 +63,42 @@
 
 
     <script>
-        console.log("Base layout script started."); // DEBUG
+        console.log("Base layout script gestart.");
 
-        // --- Page Switching Function (voor de gesimuleerde landpagina's) ---
         function showPage(pageIdToShow, scrollToTop = true) {
-            console.log("showPage called for:", pageIdToShow); // DEBUG
-            const pages = document.querySelectorAll('.page'); // Alle secties die als 'pagina' dienen
-            const mainPage = document.getElementById('main-page'); // De hoofdinhoud container
+            // ... (showPage functie zoals voorheen)
+            console.log("showPage aangeroepen voor:", pageIdToShow);
+            const pages = document.querySelectorAll('.page');
+            const mainPage = document.getElementById('main-page');
 
-            // Verberg eerst alle 'pagina' secties
             pages.forEach(page => {
                 if (page && !page.classList.contains('hidden')) {
                     page.classList.add('hidden');
                 }
             });
-
-            // Toon de gevraagde 'pagina' sectie
             const pageToShow = document.getElementById(pageIdToShow);
             if (pageToShow) {
                 pageToShow.classList.remove('hidden');
                 if (scrollToTop) {
-                    console.log("Scrolling to top for page:", pageIdToShow); // DEBUG
                     window.scrollTo(0, 0);
                 }
             } else {
-                console.warn(`Page with ID "${pageIdToShow}" not found.`);
-                // Fallback: toon de hoofdpagina als de gevraagde pagina niet bestaat
+                console.warn(`Pagina met ID "${pageIdToShow}" niet gevonden.`);
                 if (mainPage) mainPage.classList.remove('hidden');
             }
         }
 
-        // --- Contact Form Submission with Fetch ---
         const contactForm = document.getElementById('contact-form');
         const formStatusDiv = document.getElementById('form-status');
-        // Zorg ervoor dat formStatusMsg alleen wordt gedefinieerd als formStatusDiv bestaat
         const formStatusMsg = formStatusDiv ? formStatusDiv.querySelector('p') : null;
 
         if (contactForm && formStatusDiv && formStatusMsg) {
-            console.log("Contact form listener attached."); // DEBUG
+            // ... (contact form handler zoals voorheen)
             contactForm.addEventListener('submit', function(event) {
                 event.preventDefault();
-                console.log("Contact form submitted."); // DEBUG
                 const formData = new FormData(contactForm);
                 const submitButton = contactForm.querySelector('button[type="submit"]');
-                formStatusMsg.textContent = 'Sending message...';
+                formStatusMsg.textContent = 'Bericht verzenden...';
                 formStatusMsg.className = 'p-3 rounded-lg bg-yellow-100 text-yellow-800';
                 formStatusDiv.classList.remove('hidden');
                 if (submitButton) submitButton.disabled = true;
@@ -119,24 +109,22 @@
                     headers: { 'Accept': 'application/json' }
                 }).then(response => {
                     if (response.ok) {
-                        console.log("Form submission successful."); // DEBUG
-                        formStatusMsg.textContent = 'Message sent successfully!';
+                        formStatusMsg.textContent = 'Bericht succesvol verzonden!';
                         formStatusMsg.className = 'p-3 rounded-lg bg-green-100 text-green-800';
                         contactForm.reset();
                     } else {
-                        console.log("Form submission failed (server response)."); // DEBUG
                         response.json().then(data => {
-                            const errorMsg = data.errors ? data.errors.map(error => error.message).join(', ') : 'An error occurred. Please try again.';
+                            const errorMsg = data.errors ? data.errors.map(error => error.message).join(', ') : 'Er is een fout opgetreden. Probeer het opnieuw.';
                             formStatusMsg.textContent = errorMsg;
                             formStatusMsg.className = 'p-3 rounded-lg bg-red-100 text-red-800';
                         }).catch(() => {
-                            formStatusMsg.textContent = 'An unknown error occurred. Please try again.';
+                            formStatusMsg.textContent = 'Er is een onbekende fout opgetreden. Probeer het opnieuw.';
                             formStatusMsg.className = 'p-3 rounded-lg bg-red-100 text-red-800';
                         });
                     }
                 }).catch(error => {
-                    console.error('Form submission fetch error:', error); // DEBUG
-                    formStatusMsg.textContent = 'Could not send message. Check connection or try again later.';
+                    console.error('Formulier verzenden fetch error:', error);
+                    formStatusMsg.textContent = 'Kon bericht niet verzenden. Controleer verbinding of probeer later opnieuw.';
                     formStatusMsg.className = 'p-3 rounded-lg bg-red-100 text-red-800';
                 }).finally(() => {
                     if (submitButton) submitButton.disabled = false;
@@ -144,32 +132,25 @@
                 });
             });
         } else {
-            // Alleen waarschuwen als het formulier zelf bestaat, maar de status elementen niet
             if (document.getElementById('contact-form')) {
-               console.warn("Contact form status elements (#form-status or its <p>) not found. Form feedback will not work.");
+               console.warn("Contactformulier status elementen (#form-status of de <p> daarin) niet gevonden.");
             }
         }
 
-
-        // --- Custom Smooth Scroll Function (for main page navigation) ---
         function customSmoothScrollTo(targetId, duration) {
-            console.log(`[Scroll Func] Attempting to scroll to #${targetId}`); // DEBUG
+            // ... (customSmoothScrollTo functie zoals voorheen)
             const targetElement = document.getElementById(targetId);
             const header = document.getElementById('site-header');
             if (!targetElement) {
-                console.warn(`[Scroll Func] Element with ID "${targetId}" not found.`);
+                console.warn(`[Scroll Func] Element met ID "${targetId}" niet gevonden.`);
                 return;
             }
-            console.log("[Scroll Func] Target element found:", targetElement); // DEBUG
-
             const headerOffset = header ? header.offsetHeight : 0;
-            console.log("[Scroll Func] Header offset:", headerOffset); // DEBUG
             const totalOffset = headerOffset;
             const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
             const finalTargetPosition = targetPosition - totalOffset;
             const startPosition = window.pageYOffset;
             const distance = finalTargetPosition - startPosition;
-            console.log(`[Scroll Func] Scrolling from ${startPosition} to ${finalTargetPosition} (distance: ${distance})`); // DEBUG
             let startTime = null;
             function easeInOutQuad(t){ return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
             function animation(currentTime) {
@@ -181,98 +162,87 @@
                 if (timeElapsed < duration) {
                     requestAnimationFrame(animation);
                 } else {
-                    console.log(`[Scroll Func] Scroll to #${targetId} finished.`); // DEBUG
+                    console.log(`[Scroll Func] Scroll naar #${targetId} voltooid.`);
                 }
             }
-            if (Math.abs(distance) > 1) { // Voorkom onnodige animatie als de afstand klein is
-                 console.log("[Scroll Func] Starting animation loop."); // DEBUG
+            if (Math.abs(distance) > 1) {
                  requestAnimationFrame(animation);
             } else {
-                 console.log("[Scroll Func] No significant distance to scroll, animation skipped."); // DEBUG
-                 // Optioneel: scroll direct als de afstand verwaarloosbaar is
-                 // window.scrollTo(0, finalTargetPosition);
+                 console.log("[Scroll Func] Geen significante afstand om te scrollen, animatie overgeslagen.");
             }
         }
 
-
-        // --- Event Listeners (Wait for DOM) ---
         document.addEventListener('DOMContentLoaded', (event) => {
-            console.log("DOM fully loaded and parsed. Attaching listeners..."); // DEBUG
+            console.log("DOM volledig geladen en geparsed. Listeners koppelen...");
 
-            // --- Smooth Scroll Trigger for Hero Button ---
+            const headerElement = document.getElementById('site-header');
+            const mainElement = document.querySelector('main');
+            function adjustMainPadding() {
+                if (headerElement && mainElement) {
+                    const headerHeight = headerElement.offsetHeight;
+                    mainElement.style.paddingTop = `${headerHeight}px`;
+                    console.log(`Main padding-top ingesteld op: ${headerHeight}px`);
+                } else {
+                    console.warn("Header of main element niet gevonden voor padding aanpassing.");
+                }
+            }
+            adjustMainPadding();
+            window.addEventListener('resize', adjustMainPadding);
+
             const viewGalleryBtn = document.getElementById('view-gallery-btn');
             if (viewGalleryBtn) {
-                console.log("[Listener] Found view-gallery-btn, attaching listener."); // DEBUG
+                // ... (viewGalleryBtn listener zoals voorheen)
                 viewGalleryBtn.addEventListener('click', function(event) {
                     event.preventDefault();
-                    console.log("[Listener] View Gallery button clicked. Attempting to find target #gallery."); // DEBUG
                     const targetElement = document.getElementById('gallery');
                     if (targetElement) {
-                        console.log("[Listener] Target #gallery found. Calling customSmoothScrollTo."); // DEBUG
                         customSmoothScrollTo('gallery', 1000);
                     } else {
-                         console.warn("[Listener] Target #gallery not found for View Gallery button.");
+                         console.warn("[Listener] Doel #gallery niet gevonden voor View Gallery knop.");
                     }
                 });
             } else {
-                 // Alleen waarschuwen als we op de hoofdpagina zijn (waar de knop hoort te zijn)
                  if (document.getElementById('main-page') && !document.getElementById('main-page').classList.contains('hidden')) {
-                     console.warn("[Listener] Element with ID 'view-gallery-btn' not found on main page.");
+                     console.warn("[Listener] Element met ID 'view-gallery-btn' niet gevonden op hoofdpagina.");
                  }
             }
 
-            // --- Smooth Scroll for Header Links ---
              const headerLinks = document.querySelectorAll('header nav a[href^="#"]');
-             console.log(`[Listener] Found ${headerLinks.length} header anchor links.`);
              headerLinks.forEach(link => {
+                 // ... (headerLinks listener zoals voorheen)
                  link.addEventListener('click', function(event) {
                      const href = this.getAttribute('href');
-                     console.log(`[Listener] Header link clicked: href="${href}"`);
-                     if (href && href.startsWith('#') && href.length > 1) { // Check of het een interne anchor link is
+                     if (href && href.startsWith('#') && href.length > 1) {
                          const targetId = href.substring(1);
-                         console.log(`[Listener] Attempting to find target #${targetId}`);
                          const targetElement = document.getElementById(targetId);
-                         console.log(`[Listener] Target element for #${targetId}:`, targetElement);
-
-                         if (targetElement) {
-                             event.preventDefault(); // Voorkom de standaard sprong
-                             console.log(`[Listener] Target #${targetId} found. Calling customSmoothScrollTo.`);
-                             customSmoothScrollTo(targetId, 1000); // Scroll soepel
-                         } else {
-                             console.warn(`[Listener] Target #${targetId} not found on this page for header link.`);
-                         }
-                     } else {
-                         console.log(`[Listener] Header link href "${href}" is not an internal anchor or is just "#".`);
-                     }
-                 });
-             });
-
-             // --- Smooth Scroll for Footer Links ---
-             const footerLinks = document.querySelectorAll('footer a[href^="#"]');
-             console.log(`[Listener] Found ${footerLinks.length} footer anchor links.`);
-             footerLinks.forEach(link => {
-                 link.addEventListener('click', function(event) {
-                     const href = this.getAttribute('href');
-                     console.log(`[Listener] Footer link clicked: href="${href}"`);
-                     if (href && href.startsWith('#') && href.length > 1) { // Check of het een interne anchor link is
-                         const targetId = href.substring(1);
-                         console.log(`[Listener] Attempting to find target #${targetId} from footer`);
-                         const targetElement = document.getElementById(targetId);
-                         console.log(`[Listener] Target element for #${targetId} from footer:`, targetElement);
-
                          if (targetElement) {
                              event.preventDefault();
-                             console.log(`[Listener] Target #${targetId} found. Calling customSmoothScrollTo from footer.`);
                              customSmoothScrollTo(targetId, 1000);
                          } else {
-                             console.warn(`[Listener] Target #${targetId} not found on this page for footer link.`);
+                             console.warn(`[Listener] Doel #${targetId} niet gevonden op deze pagina voor header link.`);
                          }
-                     } else {
-                         console.log(`[Listener] Footer link href "${href}" is not an internal anchor or is just "#".`);
                      }
                  });
              });
-        }); // End of DOMContentLoaded listener
+
+             const footerLinks = document.querySelectorAll('footer a[href^="#"]');
+             footerLinks.forEach(link => {
+                 // ... (footerLinks listener zoals voorheen)
+                  link.addEventListener('click', function(event) {
+                     const href = this.getAttribute('href');
+                     if (href && href.startsWith('#') && href.length > 1) {
+                         const targetId = href.substring(1);
+                         const targetElement = document.getElementById(targetId);
+                         if (targetElement) {
+                             event.preventDefault();
+                             customSmoothScrollTo(targetId, 1000);
+                         } else {
+                             console.warn(`[Listener] Doel #${targetId} niet gevonden op deze pagina voor footer link.`);
+                         }
+                     }
+                 });
+             });
+        });
     </script>
 
 </body>
