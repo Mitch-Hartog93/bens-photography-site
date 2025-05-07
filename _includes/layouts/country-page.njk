@@ -16,6 +16,10 @@
             <p class="font-bold">Debug Info:</p>
             <p>Gebruikte tag voor deze pagina: <code>{{ tag }}</code></p>
             <p>Aantal foto's gevonden in collectie <code>collections.{{ tag }}</code>: <code>{{ collections[tag].length if collections[tag] else 0 }}</code></p>
+            {% if collections[tag] and collections[tag].length > 0 %}
+                <p>Eerste foto titel (test): <code>{{ collections[tag][0].data.title }}</code></p>
+                <p>Eerste foto image pad (test): <code>{{ collections[tag][0].data.image }}</code></p>
+            {% endif %}
         </div>
 
         {# Grid om de foto's weer te geven #}
@@ -24,12 +28,11 @@
             {# De 'tag' variabele komt uit de front matter van het trigger-bestand #}
             {%- for photo in collections[tag] | reverse %} {# 'reverse' toont nieuwste eerst (optioneel) #}
             <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-lg group transform transition-all duration-300 hover:shadow-2xl">
-                 {# DEBUG: Toon data voor elke foto #}
                  <img src="{{ photo.data.image | url }}" alt="{{ photo.data.alt or photo.data.title }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x400/cccccc/999999?text=Afbeeldingsfout: {{ photo.data.image | url }}'; console.error('Fout bij laden afbeelding: {{ photo.data.image | url }}')">
             </div>
             {%- else %}
             {# Wordt getoond als er geen foto's zijn met de opgegeven tag #}
-            <p class="col-span-full text-center text-gray-600">Er zijn nog geen foto's in deze galerij voor de tag '{{ tag }}'. Controleer of de foto-bestanden de juiste tag hebben.</p>
+            <p class="col-span-full text-center text-gray-600">Er zijn nog geen foto's in deze galerij voor de tag '{{ tag }}'. Controleer of de foto-bestanden de juiste tag hebben en of de `image` paden correct zijn.</p>
             {%- endfor %}
         </div>
     </div>
