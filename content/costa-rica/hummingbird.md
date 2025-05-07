@@ -1,7 +1,7 @@
 ---
 title: Hummingbird
 image: /img/uploads/screenshot-2025-05-07-at-12.52.19.png
-alt: Made in Colombia, Santa Marta
+alt: Made in Costa Rica
 tags:
   - costa-rica-photos
 ---
