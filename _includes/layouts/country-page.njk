@@ -1,40 +1,58 @@
-{# _includes/layouts/country-page.njk #}
-{% extends "layouts/base.njk" %} {# Gebruikt de algemene basis layout #}
+{# --- File: _includes/layouts/country-page.njk --- #}
 
+{# Use the base layout as the foundation for this page #}
+{% extends "layouts/base.njk" %}
+
+{# Define the content that will replace {{ content | safe }} in base.njk #}
 {% block content %}
-<section class="page py-16 bg-white text-gray-800">
-    <div class="container mx-auto px-32"> {# Gebruik dezelfde brede padding als de homepage #}
-        <div class="flex justify-between items-center mb-12">
-             {# De 'title' komt uit de front matter van het trigger-bestand (bijv. costa-rica.njk) #}
-             <h2 class="text-4xl font-bold text-gray-900">{{ title }} Foto's</h2>
-             {# Link terug naar de hoofdpagina (anker naar galerij) #}
-             <a href="/#gallery" class="text-blue-600 hover:text-orange-500 transition duration-300 text-lg">&larr; Terug naar Hoofdgalerij</a>
-        </div>
 
-        {# DEBUG: Toon de tag die wordt gebruikt en het aantal gevonden foto's #}
-        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6" role="alert">
-            <p class="font-bold">Debug Info:</p>
-            <p>Gebruikte tag voor deze pagina: <code>{{ tag }}</code></p>
-            <p>Aantal foto's gevonden in collectie <code>collections.{{ tag }}</code>: <code>{{ collections[tag].length if collections[tag] else 0 }}</code></p>
-            {% if collections[tag] and collections[tag].length > 0 %}
-                <p>Eerste foto titel (test): <code>{{ collections[tag][0].data.title }}</code></p>
-                <p>Eerste foto image pad (test): <code>{{ collections[tag][0].data.image }}</code></p>
-            {% endif %}
-        </div>
+{# Add a container div with padding for the country page content #}
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-        {# Grid om de foto's weer te geven #}
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {# Loop door alle items in de collectie die bij deze pagina hoort #}
-            {# De 'tag' variabele komt uit de front matter van het trigger-bestand #}
-            {%- for photo in collections[tag] | reverse %} {# 'reverse' toont nieuwste eerst (optioneel) #}
-            <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-lg group transform transition-all duration-300 hover:shadow-2xl">
-                 <img src="{{ photo.data.image | url }}" alt="{{ photo.data.alt or photo.data.title }}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/400x400/cccccc/999999?text=Afbeeldingsfout: {{ photo.data.image | url }}'; console.error('Fout bij laden afbeelding: {{ photo.data.image | url }}')">
-            </div>
-            {%- else %}
-            {# Wordt getoond als er geen foto's zijn met de opgegeven tag #}
-            <p class="col-span-full text-center text-gray-600">Er zijn nog geen foto's in deze galerij voor de tag '{{ tag }}'. Controleer of de foto-bestanden de juiste tag hebben en of de `image` paden correct zijn.</p>
-            {%- endfor %}
+  {# Display the page title (e.g., "Canada") from the .md file's front matter #}
+  <h1 class="text-4xl font-bold text-center mb-10 text-gray-100">{{ title }}</h1>
+
+  {# Wrapper for the photo gallery grid #}
+  {# Add Tailwind classes for a responsive grid. Adjust columns and gap as needed. #}
+  <div class="photo-gallery grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+
+    {# Check if the 'photos' array exists in front matter and has items #}
+    {% if photos and photos.length > 0 %}
+
+      {# Loop through each photo URL stored in the 'photos' array #}
+      {% for photoUrl in photos %}
+        {# Individual photo container #}
+        <div class="photo-item aspect-w-1 aspect-h-1 bg-gray-800 rounded-lg overflow-hidden shadow-md">
+          {#
+            - Display the image using the URL from the photos array.
+            - The | url filter ensures the path is resolved correctly relative to the site root (important if paths were local, safe for absolute URLs too).
+            - Added basic lazy loading and error handling.
+            - Tailwind classes make the image cover its container.
+          #}
+          <img
+            src="{{ photoUrl | url }}"
+            alt="Foto uit {{ title }}"
+            class="w-full h-full object-cover"
+            loading="lazy"
+            onerror="this.onerror=null; this.src='https://placehold.co/600x600/cccccc/999999?text=Fout'; this.classList.add('opacity-50');" {# Simple error handling #}
+          >
         </div>
-    </div>
-</section>
+      {% endfor %}
+
+    {% else %}
+      {# Message shown if the 'photos' array is empty or doesn't exist #}
+      <p class="text-center text-gray-400 sm:col-span-2 md:col-span-3 lg:col-span-4">Er zijn nog geen foto's beschikbaar voor {{ title }}.</p>
+    {% endif %}
+
+  </div> {# End of photo-gallery grid div #}
+
+  {# Render any extra Markdown content written below the '---' in the .md file #}
+  {# Apply some basic prose styling using Tailwind Typography plugin (if installed) or custom styles #}
+  <div class="prose prose-invert max-w-none mt-12">
+    {{ content | safe }}
+  </div>
+
+</div> {# End of container div #}
+
 {% endblock %}
+{# --- End of File: _includes/layouts/country-page.njk --- #}
