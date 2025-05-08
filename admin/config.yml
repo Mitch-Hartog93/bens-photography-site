@@ -6,9 +6,8 @@ backend:
   name: git-gateway
   branch: main # IMPORTANT: Change this to 'master' if your main branch is named master
 
-# Specifies where uploaded media files should be stored in the repository
-# relative to the project root.
-media_folder: "img/uploads"
+# Specifies where uploaded media files should be stored IN THE REPOSITORY
+media_folder: "static/img/uploads" # <<< Change this path
 
 # Specifies the public URL path for accessing the media files stored in
 # 'media_folder'. This path should be relative to the site root.
