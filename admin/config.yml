@@ -1,78 +1,79 @@
-# Backend: Vertelt het CMS hoe het met je code (op GitHub/GitLab) moet praten.
-# Dit werkt goed samen met Netlify/Vercel hosting.
+# Netlify CMS Configuration for bensfotografie.nl
+
+# Specifies the backend integration. 'git-gateway' allows Netlify Identity
+# users to push directly to the Git repository.
 backend:
-  name: git-gateway # Gebruik de authenticatie van je hosting (Netlify Identity / Vercel)
-  branch: main # Of de naam van je hoofdbranch (vaak 'main' of 'master')
+  name: git-gateway
+  branch: main # IMPORTANT: Change this to 'master' if your main branch is named master
 
-# Media: Waar moeten geüploade afbeeldingen worden opgeslagen?
-media_folder: "static/img/uploads" # Pad in je projectmap waar foto's komen
-public_folder: "/img/uploads" # Pad zoals de website het ziet (zonder 'static')
+# Specifies where uploaded media files should be stored in the repository
+# relative to the project root.
+media_folder: "img/uploads"
 
-# Collections: Welke soorten inhoud kan je vader bewerken?
+# Specifies the public URL path for accessing the media files stored in
+# 'media_folder'. This path should be relative to the site root.
+public_folder: "/img/uploads"
+
+# Defines the content types (collections) manageable via the CMS.
 collections:
-  # 1. Instellingen voor de hoofdpagina (About Me tekst)
-  - name: "pages" # Interne naam voor deze collectie
-    label: "Hoofdpagina" # Naam zoals je vader het ziet in het CMS
-    files: # We bewerken hier één specifiek bestand
-      - label: "Over Mij Pagina" # Naam van het item in het CMS
-        name: "about_content" # Interne naam
-        file: "content/pages/index.njk" # WELK BESTAND WORDT BEWERKT?
-        fields: # Welke velden in dat bestand zijn bewerkbaar?
-          # Let op: Decap CMS werkt het makkelijkst met Markdown (.md) bestanden.
-          # Het direct bewerken van .njk is lastig. We maken hier een placeholder
-          # veld aan, maar idealiter splits je de 'About Me' tekst later
-          # naar een apart _data/about.md bestand. Voor nu laten we dit even zo.
-          - { label: "Titel (niet bewerken)", name: "title_placeholder", widget: "hidden", default: "Home" }
-          # Voeg hier later velden toe als je bijv. de 'About' tekst in een apart bestand zet.
+  # This collection manages the galleries, where each country has ONE file
+  # containing a list of its photos.
+  - label: "Gallerij" # How the collection is named in the CMS UI
+    name: "gallery"   # Internal identifier for this collection
+    description: "Beheer hier de foto's per land. Klik op een land om de foto's te wijzigen."
+    # 'files' collection type means we edit specific, pre-defined files.
+    files:
+      # Configuration for the Canada gallery
+      - label: "Canada" # Label shown in the CMS UI for this file entry
+        name: "canada"  # Internal identifier for this file entry
+        # The EXACT path to the file this entry will edit in the repository.
+        # Make sure this file exists (content/gallery/canada.md).
+        file: "content/gallery/canada.md"
+        fields:
+          # Optional: A title field for the country page itself
+          - { label: "Titel (optioneel)", name: "title", widget: "string", required: false, default: "Canada" }
+          # The list of photos for this country
+          - label: "Foto's voor Canada"
+            name: photos # This name MUST match the front matter key used in Eleventy templates
+            widget: list # Allows adding multiple items (images in this case)
+            summary: "{{fields.image}}" # Shows a preview of the image in the list UI
+            # Defines the field within each list item (just an image field)
+            field: { label: "Afbeelding", name: "image", widget: "image" }
 
-  # 2. Collectie voor Costa Rica Foto's
-  - name: "costa_rica" # Interne naam (uniek)
-    label: "Foto's Costa Rica" # Naam zoals je vader het ziet
-    folder: "content/costa-rica" # In welke map staan de foto-bestanden (.md)?
-    create: true # Mag je vader nieuwe foto's toevoegen? Ja.
-    slug: "{{slug}}" # Hoe wordt de bestandsnaam gemaakt (automatisch)
-    fields: # Welke informatie heeft elke foto? (Komt overeen met front matter)
-      - { label: "Titel / Bijschrift", name: "title", widget: "string" }
-      - { label: "Foto Bestand", name: "image", widget: "image" }
-      - { label: "Alternatieve Tekst (Alt)", name: "alt", widget: "string" }
-      - { label: "Tag (niet wijzigen!)", name: "tags", widget: "hidden", default: ["costa-rica-photos"] } # Automatisch de juiste tag
-      - { label: "Beschrijving (optioneel)", name: "body", widget: "markdown", required: false }
+      # Configuration for the Colombia gallery
+      - label: "Colombia"
+        name: "colombia"
+        file: "content/gallery/colombia.md" # Make sure this file exists
+        fields:
+          - { label: "Titel (optioneel)", name: "title", widget: "string", required: false, default: "Colombia" }
+          - label: "Foto's voor Colombia"
+            name: photos
+            widget: list
+            summary: "{{fields.image}}"
+            field: { label: "Afbeelding", name: "image", widget: "image" }
 
-  # 3. Collectie voor Colombia Foto's (kopie van Costa Rica, maar met andere waarden)
-  - name: "colombia"
-    label: "Foto's Colombia"
-    folder: "content/colombia"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Titel / Bijschrift", name: "title", widget: "string" }
-      - { label: "Foto Bestand", name: "image", widget: "image" }
-      - { label: "Alternatieve Tekst (Alt)", name: "alt", widget: "string" }
-      - { label: "Tag (niet wijzigen!)", name: "tags", widget: "hidden", default: ["colombia-photos"] }
-      - { label: "Beschrijving (optioneel)", name: "body", widget: "markdown", required: false }
+      # Configuration for the Costa Rica gallery
+      - label: "Costa Rica"
+        name: "costa-rica" # Use hyphens for consistency if file slug uses hyphen
+        file: "content/gallery/costa-rica.md" # Make sure this file exists
+        fields:
+          - { label: "Titel (optioneel)", name: "title", widget: "string", required: false, default: "Costa Rica" }
+          - label: "Foto's voor Costa Rica"
+            name: photos
+            widget: list
+            summary: "{{fields.image}}"
+            field: { label: "Afbeelding", name: "image", widget: "image" }
 
-  # 4. Collectie voor Canada Foto's (kopie van Costa Rica, maar met andere waarden)
-  - name: "canada"
-    label: "Foto's Canada"
-    folder: "content/canada"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Titel / Bijschrift", name: "title", widget: "string" }
-      - { label: "Foto Bestand", name: "image", widget: "image" }
-      - { label: "Alternatieve Tekst (Alt)", name: "alt", widget: "string" }
-      - { label: "Tag (niet wijzigen!)", name: "tags", widget: "hidden", default: ["canada-photos"] }
-      - { label: "Beschrijving (optioneel)", name: "body", widget: "markdown", required: false }
+      # Configuration for the Netherlands gallery
+      - label: "Nederland"
+        name: "netherlands"
+        file: "content/gallery/netherlands.md" # Make sure this file exists
+        fields:
+          - { label: "Titel (optioneel)", name: "title", widget: "string", required: false, default: "Nederland" }
+          - label: "Foto's voor Nederland"
+            name: photos
+            widget: list
+            summary: "{{fields.image}}"
+            field: { label: "Afbeelding", name: "image", widget: "image" }
 
-  # 5. Collectie voor Nederland Foto's (kopie van Costa Rica, maar met andere waarden)
-  - name: "netherlands"
-    label: "Foto's Nederland"
-    folder: "content/netherlands"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Titel / Bijschrift", name: "title", widget: "string" }
-      - { label: "Foto Bestand", name: "image", widget: "image" }
-      - { label: "Alternatieve Tekst (Alt)", name: "alt", widget: "string" }
-      - { label: "Tag (niet wijzigen!)", name: "tags", widget: "hidden", default: ["netherlands-photos"] }
-      - { label: "Beschrijving (optioneel)", name: "body", widget: "markdown", required: false }
+# End of configuration
