@@ -6,9 +6,5 @@ permalink: /canada/       # Defines the final URL (e.g., bensfotografie.nl/canad
 tileImage: https://i.imgur.com/a6Mk328.jpg
 # The 'photos' list below is managed by Netlify CMS. Leave any existing photo paths here.
 photos:
-  # Example paths - keep any real ones added by CMS:
-  # - /img/uploads/your-canada-photo1.jpg
-  # - /img/uploads/your-canada-photo2.jpg
+  - /img/uploads/screenshot-2025-05-07-at-12.52.19.png
 ---
-
-(Optional: Any Markdown text for the page body goes here)
